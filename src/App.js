@@ -7,11 +7,14 @@ const initialItems = [
 ];
 
 export default function App() {
+
+  const [items, setItems] = useState([]);
+
   return (
     <div className="app">
       <Logo />
       <Form />
-      <PackingList />
+      <PackingList items={items}/>
       <Stats />
     </div>
   );
@@ -58,11 +61,11 @@ function Form() {
     </form>
   );
 }
-function PackingList() {
+function PackingList({items}) {
   return (
     <div className="list">
       <ul>
-        {initialItems.map((item) => (
+        {items.map((item) => (
           <Item item={item} key={item.id} />
         ))}
       </ul>
