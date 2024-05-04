@@ -17,7 +17,7 @@ export default function App() {
   }
 
   function toggleItem(id) {
-    setItems((items) => items.map((item) => item.id === id ? {...item, packed: !item.packed} : items ) )
+    setItems((items) => items.map((item) => item.id === id ? {...item, packed: !item.packed} : item ) )
   }
   return (
     <div className="app">
@@ -87,7 +87,7 @@ function Item({ item, onDeleteItem, ontoggleItem }) {
   return (
     <li>
       <input type="checkbox" checked={item.packed} onChange={ () => ontoggleItem(item.id)} />
-      <span style={item.packed ? { textDecoration: "line-through" } : {}}>
+      <span style={item.packed ? { textDecoration: "line-through" } : {} }>
         {" "}
         {item.quantity}
         
@@ -99,11 +99,23 @@ function Item({ item, onDeleteItem, ontoggleItem }) {
 }
 
 function Stats({items}) {
-
+if(!items.length) 
+return (
+<p className="stats"><em> Start adding items in your list </em>
+</p>
+);
   let numItems = items.length;
+  const itemPacked = items.filter((item) => item.packed).length;
+  let percentagePacked = numItems > 0 ? Math.round((itemPacked / numItems) * 100) : 0;
   return (
+
     <footer className="stats">
-      <em> 💼 You have {numItems} items on your List, and you alredy packed X (X%)</em>
+      <em> 
+        {
+          percentagePacked === 100 ? `🎉 You are Ready to go! 🧳 💼 🎉` : ` 💼 You have ${numItems} items on your list, and you already packed ${percentagePacked} %`
+        }
+        
+    </em>
     </footer>
   );
 }
