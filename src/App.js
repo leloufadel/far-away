@@ -72,6 +72,7 @@ function Form({onAddItems}) {
   );
 }
 function PackingList({items, onDeleteItem, ontoggleItem}) {
+  const [sortBy, setSortBy] = useState("input");
   return (
     <div className="list">
       <ul>
@@ -79,6 +80,13 @@ function PackingList({items, onDeleteItem, ontoggleItem}) {
           <Item item={item} onDeleteItem={onDeleteItem} ontoggleItem={ontoggleItem} key={item.id} />
         ))}
       </ul>
+      <div className="actions">
+       <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+        <option value="input">Sort by input Order</option>
+        <option value="description">Sort by description</option>
+        <option value="packed">Sort by packed Status</option>
+       </select>
+      </div>
     </div>
   );
 }
@@ -95,6 +103,8 @@ function Item({ item, onDeleteItem, ontoggleItem }) {
       </span>
       <button onClick={() => onDeleteItem(item.id)}>❌</button>
     </li>
+
+
   );
 }
 
