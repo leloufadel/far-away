@@ -9,11 +9,13 @@ const initialItems = [
 export default function App() {
 
   const [items, setItems] = useState([]);
-
+  function HandleAddItem (item){
+     setItems((items) => [...items, item]);
+  }
   return (
     <div className="app">
       <Logo />
-      <Form />
+      <Form onAddItems={HandleAddItem} />
       <PackingList items={items}/>
       <Stats />
     </div>
@@ -35,7 +37,7 @@ function Form() {
     const newItem = { description, quantity, packed: false, 
       id: Date.now() };
      console.log(newItem);
-    
+     onAddItems(newItem);
      setDescription("");
      setQuantity(1);
     
