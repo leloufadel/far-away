@@ -24,7 +24,7 @@ export default function App() {
       <Logo />
       <Form onAddItems={HandleAddItem} />
       <PackingList items={items} onDeleteItem={HandleDeleteItem} ontoggleItem={toggleItem}/>
-      <Stats />
+      <Stats items={items} />
     </div>
   );
 }
@@ -49,7 +49,7 @@ function Form({onAddItems}) {
      setDescription("");
      setQuantity(1);
     
-  }
+ }
 
   return (
     <form className="add-form" onClick={handleSubmit}>
@@ -76,7 +76,7 @@ function PackingList({items, onDeleteItem, ontoggleItem}) {
     <div className="list">
       <ul>
         {items.map((item) => (
-          <Item item={item} onDeleteItem={onDeleteItem} ontoggleItem={ontoggleItem}  key={item.id} />
+          <Item item={item} onDeleteItem={onDeleteItem} ontoggleItem={ontoggleItem} key={item.id} />
         ))}
       </ul>
     </div>
@@ -98,10 +98,12 @@ function Item({ item, onDeleteItem, ontoggleItem }) {
   );
 }
 
-function Stats() {
+function Stats({items}) {
+
+  let numItems = items.length;
   return (
     <footer className="stats">
-      <em> 💼 You have X items on your List, and you alredy packed X (X%)</em>
+      <em> 💼 You have {numItems} items on your List, and you alredy packed X (X%)</em>
     </footer>
   );
 }
