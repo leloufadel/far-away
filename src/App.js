@@ -21,7 +21,8 @@ export default function App() {
   }
   
   function clearList() {
-    setItems([]);
+    const confirmed = window.confirm("Are you sure you want to clear the list?")
+    if (confirmed) setItems([]);
   }
 
   return (
@@ -146,4 +147,4 @@ return (
     </footer>
   );
 }
-// export default App;
+
